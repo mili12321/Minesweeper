@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper game</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body onload="initGame()">
+    <!-- <button class="btn" onload="initGame()">START GAME</button> -->
+    <div class="victory">victory!</div>
+    <div class="game-over">game over</div>
+    <button class="play-again" onclick="restart()">play again</button>
+    <button class="hints" onclick="showHint()">hint1</button>
+    <button class="hints" onclick="showHint()">hint2</button>
+    <button class="hints" onclick="showHint()">hint3</button>
+
+    <div class="info">Shown Count: <span class="shown-count">0</span></div>
+    <div class="info">Marked Count: <span class="marked-count">0</span></div>
+    <div class="info">Secends Passed: <span class="secs-passed"></span>
+        <h1 class="timer">00 : 00 . 000</h1>
+    </div>
+
+    <table class="board-container">
+        <tbody class="board-game">
+            
+        </tbody>
+    </table>
+    <script src="js/main.js"></script>
+</body>
+</html>
