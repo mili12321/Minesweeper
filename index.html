@@ -5,27 +5,166 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper game</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/dbc6776825.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Ranchers&family=Rancho&display=swap" rel="stylesheet"><!--title-->
+    <link href="https://fonts.googleapis.com/css2?family=Eater&display=swap" rel="stylesheet"><!--title2-->
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet"><!--quote-->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap" rel="stylesheet"><!--modal-title-->
 </head>
 <body onload="initGame()">
-    <!-- <button class="btn" onload="initGame()">START GAME</button> -->
-    <div class="victory">victory!</div>
-    <div class="game-over">game over</div>
-    <button class="play-again" onclick="restart()">play again</button>
-    <button class="hints" onclick="showHint()">hint1</button>
-    <button class="hints" onclick="showHint()">hint2</button>
-    <button class="hints" onclick="showHint()">hint3</button>
+    <div class="game-body">
+
+    <div class="hints" onclick="showHint(this,event);usingHints()">💡</div>
+    <div class="hints" onclick="showHint(this,event);usingHints()">💡</div>
+    <div class="hints" onclick="showHint(this,event);usingHints()">💡</div>
+
+    <div class="lives" onclick="life(this,event)">❤️</div>
+    <div class="lives" onclick="life(this,event)">❤️</div>
+    <div class="lives" onclick="life(this,event)">❤️</div>
+
 
     <div class="info">Shown Count: <span class="shown-count">0</span></div>
     <div class="info">Marked Count: <span class="marked-count">0</span></div>
     <div class="info">Secends Passed: <span class="secs-passed"></span>
         <h1 class="timer">00 : 00 . 000</h1>
     </div>
+    <div>
+        <div class="play-again" onclick="restart()">😀</div>
+        <table class="board-container">
+            <tbody class="board-game">
 
-    <table class="board-container">
-        <tbody class="board-game">
-            
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div class="victory">victory!</div>
+    <div class="game-over">game over</div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Change Level</button>
+        <div class="dropdown-content">
+        <div class="level-number" id="lev1" onclick="gameLevel(1)">level 1</div>
+        <div class="level-number" id="lev2" onclick="gameLevel(2)">level 2</div>
+        <div class="level-number" id="lev3" onclick="gameLevel(3)">level 3</div>
+        </div>
+    </div>
+      
+
+    <!-- <button data-modal-target="#modal" style="position:absolute;background-color: aliceblue;color: black;top:0;left: 20%;">open</button>
+    </div> -->
+<!-- ----------------------------------characters window------------------------------------------- -->
+<div class="characters-window">
+<div class="modal" id="modal">
+    <div class="modal-header">
+        <div class="title">Choose a Hero to Start the Game</div>
+    </div>
+    <div class="modal-body">
+        <div class="card middle" id="card-1" onclick="closeModal(); gameStyle(1)">
+            <div class="front">
+                <img src="../Project_1-CA/imgs/pickle-rick-removebg.jpg" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content middle">
+                    <h2>PICKLE RICK</h2>
+                    <div class="qoute">
+                        "Now if you'll excuse me, I've got a quick solo adventure to go on and this one will not be directed by Ron Howard."
+                    </div>
+                    
+                    <div class="sm">
+                        <div class="block">
+                            <div class="health-points">Health</br><i class="fas fa-heart"></i><span class="power"><span class="health-line"></span></span></div>
+                        </div>
+                        <div class="block super-power">Super-Power</br>
+                            <i class="fas fa-fist-raised"></i><div class="power"><span class="power-line"></span></div>
+                        </div>
+                        <div class="block Level-IQ">Level-of-IQ</br>
+                            <i class="fas fa-shield-alt"></i><div class="power"><span class="iq-line"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card middle" id="card-2" onclick="closeModal(); gameStyle(2)">
+            <div class="front">
+                <img src="../Project_1-CA/imgs/zombie.png" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content middle">
+                    <h2>Zombie Farook</h2>
+                    <div class="qoute">
+                        "Living for the music"</br>"black belt for eating brains"
+                    </div>
+                    
+                    <div class="sm">
+                        <div class="block">
+                            <div class="health-points">Immortal</br><i class="fas fa-heart"></i><span class="power"><span class="health-line"></span></span></div>
+                        </div>
+                        <div class="block super-power">Super-Power</br>
+                            <i class="fas fa-fist-raised"></i><div class="power"><span class="power-line"></span></div>
+                        </div>
+                        <div class="block Level-IQ">Level-of-IQ</br>
+                            <i class="fas fa-shield-alt"></i><div class="power"><span class="iq-line"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card middle" id="card-3" onclick="closeModal(); gameStyle(3)">
+            <div class="front">
+                <img src="../Project_1-CA/imgs/zombie_pink.png" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content middle">
+                    <h2>BAMBI-Zi</h2>
+                    <div class="qoute">
+                        "Hello, I wood like to visit for a Midnight Znack. How does ice cream and brains zound?"
+                    </div>
+                    
+                    <div class="sm">
+                        <div class="block">
+                            <div class="health-points">Immortal</br><i class="fas fa-heart"></i><span class="power"><span class="health-line"></span></span></div>
+                        </div>
+                        <div class="block super-power">Super-Power</br>
+                            <i class="fas fa-fist-raised"></i><div class="power"><span class="power-line"></span></div>
+                        </div>
+                        <div class="block Level-IQ">Level-of-IQ</br>
+                            <i class="fas fa-shield-alt"></i><div class="power"><span class="iq-line"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card middle" id="card-4" onclick="closeModal(); gameStyle(4)">
+            <div class="front">
+                <img src="../Project_1-CA/imgs/me/me.png" alt="">
+            </div>
+            <div class="back">
+                <div class="back-content middle">
+                    <h2>Mrs. Perfect</h2>
+                    <div class="qoute">
+                        "I tried very hard to make this minesweeper game fun. enjoy the game and hope you will like it !"
+                    </div>
+                    
+                    <div class="sm">
+                        <div class="block">
+                            <div class="health-points">Immortal</br><i class="fas fa-heart"></i><span class="power"><span class="health-line"></span></span></div>
+                        </div>
+                        <div class="block super-power">Super-Power</br>
+                            <i class="fas fa-fist-raised"></i><div class="power"><span class="power-line"></span></div>
+                        </div>
+                        <div class="block Level-IQ">Level-of-IQ</br>
+                            <i class="fas fa-shield-alt"></i><div class="power"><span class="iq-line"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlay"></div>
+</div>
+
+
     <script src="js/main.js"></script>
+ 
 </body>
 </html>

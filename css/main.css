@@ -1,57 +1,689 @@
 /*game css*/
-*{
-    align-items: center;
-    margin:5px auto;
-    text-align: center;
-    color: white;
+
+* {
+ margin: 0;
+} 
+body {
     background-color: black;
 }
-.td-hidden{
+.game-body{
+    padding-bottom: 200px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+.board-container{
+    margin: 0 auto;
+}
+.info{
+    margin: 0 auto;
+}
+.td-hidden {
     border: 2px solid transparent;
     text-align: center;
-    background-color: lightpink;
+    background-color: rgb(255, 189, 235);
     color: black;
     width: 50px;
     height: 50px;
+    cursor: pointer;
+    transition: 5s;
 }
-.td-shown{
+
+.td-hidden:hover {
+    background-image: radial-gradient(farthest-corner at 40px 40px, rgba(255, 147, 197, 0.712) 0%, rgba(255, 202, 239, 0.925) 100%);
+}
+
+.td-shown {
     border: 2px solid transparent;
     text-align: center;
     background-color: lightgrey;
     color: black;
     width: 50px;
     height: 50px;
+    cursor: pointer;
+    pointer-events: none;
 }
-.game-over{
+
+.game-over {
+    display: none;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     color: white;
-    width: 110px;
+    width: 416px;
+    height: 105px;
+    font-size: 78px;
     background-color: rgb(250, 59, 59);
-    text-align: center;
-    display: none;
+    margin-top: 0 auto;
+    border: 2px solid rgb(0, 0, 0);
+    /* transform: rotate(0deg); */
+    border-radius: 10px;
+    animation: loose-txt 0.3s linear;
 }
-.play-again{
-    background-color: turquoise;
-    width: 100px;
-    display: none;
+@keyframes loose-txt{
+    0%{
+        opacity:0;
+        transform: rotate(10deg);
+    }
+    50%{
+        opacity:0.5;
+        transform: rotate(-10deg);
+    }
+    100%{
+        opacity:1;
+        transform: rotate(10deg);
+    }
 }
-.victory{
+.play-again {
+    background-color: transparent;
+    width: 50px;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 5px auto;
+    transition: 0.5s;
+}
+
+.play-again:hover {
+    transform: rotate(360deg);
+}
+
+.victory {
+    display: none;
     color: black;
     background-color: rgb(51, 255, 153);
-    width: 110px;
-    display: none;
+    position: absolute;
+    top: 39%;
+    left: 35%;
+    transform: translate(-50%,-50%);
+    width: 416px;
+    height: 105px;
+    font-size: 78px;
+    margin-top: 0 auto;
+    border: 2px solid rgb(0, 0, 0);
+    transform: rotate(0deg);
+    border-radius: 10px;
+    animation: victory-txt 0.3s linear;
 }
-.timer{
-    font-size:20px;
+@keyframes victory-txt{
+    0%{
+        opacity:0;
+        transform: rotate(10deg);
+    }
+    50%{
+        opacity:0.5;
+        transform: rotate(-10deg);
+    }
+    100%{
+        opacity:1;
+        transform: rotate(10deg);
+    }
+}
+
+.timer {
+    font-size: 20px;
     /* margin:0 auto; */
 }
-.info{
+
+.info {
     border: 1px solid white;
     width: 120px;
     padding: 2px;
 }
+
 .hints{
-    color: black;
-    background-color: rgb(255, 238, 145);
+    font-size: 40px;
+    /* background-color: rgb(255, 238, 145); */
     width: 100px;
-    margin: 5px;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transform: rotate(20deg);
+    transition: 0.5s;
+    opacity: 100%;
+}
+.run-animation{
+    animation: fade 2s forwards;
+}
+@keyframes fade {
+    0% {
+        opacity: 100%;
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        opacity: 50%;
+        transform: rotate(15deg);
+    }
+
+    100% {
+        opacity: 0%;
+        transform: rotate(-15deg);
+    }
+}
+
+.hints:hover {
+    transform: rotate(-20deg);
+}
+
+.lives{
+    font-size: 30px;
+    width: 100px;
+    display: inline-block;
+    /* cursor: pointer; */
+    margin-bottom: 20px;
+    transition: 0.5s;
+    opacity: 100%;
+    animation: pumpingHeart 1.5s infinite ease-in;
+}
+@keyframes pumpingHeart{
+    0% {
+        font-size: 30px;
+    }
+
+    100% {
+        font-size: 40px;
+    }
+}
+.life1{
+    opacity: 1;
+    animation: life1-fade 0.4s linear;
+}
+@keyframes life1-fade{
+    0%{opacity: 1;transform:rotate(10deg);}
+    50%{opacity: 0.5;transform:rotate(20deg);}
+    100%{opacity: 0;}
+}
+.life1-end{
+    opacity: 0;
+}
+.life2{
+    opacity: 1;
+    animation: life2-fade 0.4s linear;
+}
+@keyframes life2-fade{
+    0%{opacity: 1;transform:rotate(10deg);}
+    50%{opacity: 0.5;transform:rotate(20deg);}
+    100%{opacity: 0;}
+}
+.life2-end{
+    opacity: 0;
+}
+.life3{
+    opacity: 1;
+    /* animation: life3-fade 0.4s linear; */
+}
+/* @keyframes life3-fade{
+    0%{opacity: 1;transform:rotate(10deg);}
+    50%{opacity: 0.5;transform:rotate(20deg);}
+    100%{opacity: 0;}
+} */
+/* .life3-end{
+    opacity: 0;
+} */
+.dropbtn {
+    background-image:linear-gradient( #73ffe8, #00e6bf, #00c0a0);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+  
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9cb;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+  
+.dropdown-content div {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+  
+.dropdown-content div:hover {background-color: #9fffefd0;transition: 1s;cursor: pointer;}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+.dropdown:hover .dropbtn {
+    background-image:linear-gradient( #00c0a0, #009980, #01856f);
+}
+/* ------------------------------------- characters window ----------------------------------------------------- */
+
+.characters-window, .characters-window::after, .characters-window::before{
+    box-sizing: border-box;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,50%) scale(0);
+    transition: 2ms ease-in-out;
+    border: 2px solid rgb(255, 168, 255);
+    border-radius: 20px;
+    background-color: #2c3e50;
+    z-index: 10;
+    width: 2000px;
+    height: 500px;
+    max-width: 80%;
+    /* position: relative; */
+    /* max-width:1000px ;
+    min-width: 1000px; */
+}
+.modal.active{
+    transform: translate(-50%,-50%)scale(1);
+}
+.modal-header{
+    padding: 10px 15px;
+    /* display: flex; */
+    align-items: center;
+    border-bottom: 2px solid rgb(255, 168, 255);
+}
+.modal-header .title{
+    font-size: 1.25rem;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+.modal-body{
+    padding: 40px 55px;
+}
+
+.overlay{
+    position: fixed;
+    opacity:0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.863);
+    pointer-events: none; /*not catching the events*/
+}
+
+.overlay.active{
+    pointer-events: all; /* catching all the events */
+    opacity: 1;
+}
+/*--------------------------------------- characters -------------------------------------------*/
+.middle{  /*pouse the object in the middle*/
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.card{ /*the parrent size*/
+    cursor: pointer;
+    width:251px;
+    height:380px;  
+}
+
+.front,.back{
+    width: 100%;  /*of the parent(.card)*/
+    height: 100%; /*of the parent(.card)*/
+    overflow: hidden;
+    backface-visibility: hidden;
+    border-radius: 30px;
+    position: absolute;
+    transition: transform 0.6s linear;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+#card-1 .front {
+    height: 100%;
+    background-image: radial-gradient(rgb(255, 91, 91), rgb(253, 253, 107), rgb(110, 255, 110),rgb(77, 255, 77));
+}
+.front{
+    transform: perspective(600px) rotateY(0deg);/*rotate*/
+}
+#card-1 .back{
+    background-image: linear-gradient(rgb(255, 91, 91), rgb(253, 253, 107), rgb(110, 255, 110));
+    /* transform: perspective(600px) rotateY(180deg); */
+    /* rotate to the front  */
+}
+.back{
+    transform: perspective(600px) rotateY(180deg);/*rotate*/
+}
+.back-content {
+    color: #2c3e50;
+    text-align: center;
+    width: 100%;
+}
+h2{
+    /* font-family: 'Ranchers', cursive;
+    font-family: 'Rancho', cursive; */
+    font-family: 'Eater', cursive;
+    font-size: 20px;
+    margin:2% 10% 10% 10%; 
+}
+.qoute{
+    margin:5% auto;
+    max-width: 75%;
+    font-size: larger;
+    font-family: 'Rancho', cursive;
+}
+.power{
+    display: inline-block;
+    width: 50%;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+    background: #2c3e50;
+    transition: 0.4s;
+    border-radius: 10px;
+}
+.health-points{
+    color: #ff3a3a;
+}
+.health-line{
+    display: block;
+    width: 20px;
+    height: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    border-radius: 10px;
+    animation: stretch1 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch1{
+    0%{width: 0%; background: #ff3a3a;}
+    25%{width: 15%; background: #ff3a3a;}
+    50%{width: 30%; background: #ff3a3a;}
+    75%{width: 45%; background: #ff3a3a;}
+    100%{width: 57%; background: #ff3a3a;}
+}
+.super-power{
+    color: #00ff40;
+}
+.power-line{
+    display: block;
+    width: 20px;
+    height: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    border-radius: 10px;
+    animation: stretch2 2s linear 0.5s normal forwards running;
+}
+
+
+@keyframes stretch2{
+    0%{width: 0%; background: #2fff63;}
+    25%{width: 10%; background: #2fff63;}
+    50%{width: 20%; background: #2fff63;}
+    75%{width: 30%; background: #2fff63;}
+    100%{width: 45%; background: #2fff63;}
+}
+.Level-IQ{
+    color:#8153ff ;
+}
+.iq-line{
+    display: block;
+    width: 20px;
+    height: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    border-radius: 10px;
+    animation: stretch3 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch3{
+    0%{width: 0%; background: #8153ff;}
+    15%{width: 15%; background: #8153ff;}
+    25%{width: 25%; background: #8153ff;}
+    50%{width: 55%; background: #8153ff;}
+    100%{width: 120%; background: #8153ff;}
+}
+.fas{
+    font-size: 12px;
+    padding: 5px;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+.card:hover > .front{
+    transform: perspective(600px) rotateY(-180deg);/*rotate*/
+}
+.card:hover > .back{
+    transform: perspective(600px) rotateY(0deg);/*rotate*/
+}
+#card-1{
+    position: absolute;
+    left:20%;
+    top:50%;
+}
+#card-2{
+    position: absolute;
+    left:40%;
+    top:50%;
+}
+#card-3{
+    position: absolute;
+    left: 60%;
+    top:50%;
+}
+#card-4{
+    position: absolute;
+    left: 80%; 
+    top:50%; 
+}
+
+/*------------------------------ zombie------------------------------------------ */
+#card-2 img{
+    margin-top: 15%;
+    margin-left: 15%;
+    width: 70%;
+    height: 80%;
+}
+#card-2 .front{
+    height: 100%;
+    background-image: radial-gradient(rgb(173, 87, 0), rgb(255, 189, 64), rgb(65, 64, 114),rgb(14, 47, 85));
+}
+#card-2 .back{
+    background-image: linear-gradient(rgb(248, 196, 143), rgb(243, 206, 138), rgb(94, 92, 89),rgb(94, 75, 63));
+    /*transform: perspective(600px) rotateY(180deg);/*rotate to the front*/
+}
+#card-2 .health-line{
+    animation: stretch1-z 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch1-z{
+    0%{width: 0%; background: #ff3a3a;}
+    25%{width: 25%; background: #ff3a3a;}
+    50%{width: 50%; background: #ff3a3a;}
+    75%{width: 75%; background: #ff3a3a;}
+    100%{width: 100%; background: #ff3a3a;}
+}
+#card-2 .power-line{
+    animation: stretch2-z 2s linear 0.5s normal forwards running;
+}
+
+@keyframes stretch2-z{
+    0%{width: 0%; background: #2fff63;}
+    25%{width: 10%; background: #2fff63;}
+    50%{width: 20%; background: #2fff63;}
+    75%{width: 30%; background: #2fff63;}
+    100%{width: 45%; background: #2fff63;}
+}
+
+#card-2 .iq-line{
+    animation: stretch3-z 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch3-z{
+    0%{width: 0%; background: #8153ff;}
+    15%{width: 1%; background: #8153ff;}
+    25%{width: 3%; background: #8153ff;}
+    50%{width: 5%; background: #8153ff;}
+    100%{width: 7%; background: #8153ff;}
+}
+/* zombie pink ------------------------------------------------------------ */
+#card-3 img{
+    margin-top: 15%;
+    margin-left: 15%;
+    width: 70%;
+    height: 80%;
+}
+#card-3 .front{
+    height: 100%;
+    background-image: radial-gradient(rgb(255, 240, 85), rgb(79 ,196, 255), rgb(255, 151, 237),rgb(232, 59 ,203));
+}
+#card-3 .back{
+    /* background-image:radial-gradient(rgb(255, 252, 176), rgb(255, 155, 238), rgb(150, 220, 255),rgb(102, 204, 255)); */
+    background-image:linear-gradient(rgb(255, 147, 201), rgb(201, 134, 255), rgb(169, 249, 255)); 
+    /*transform: perspective(600px) rotateY(180deg);/*rotate to the front*/
+}
+#card-3 .health-line{
+    animation: stretch1-zp 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch1-zp{
+    0%{width: 0%; background: #ff3a3a;}
+    25%{width: 25%; background: #ff3a3a;}
+    50%{width: 50%; background: #ff3a3a;}
+    75%{width: 75%; background: #ff3a3a;}
+    100%{width: 100%; background: #ff3a3a;}
+}
+#card-3 .power-line{
+    animation: stretch2-zp 2s linear 0.5s normal forwards running;
+}
+
+@keyframes stretch2-zp{
+    0%{width: 0%; background: #2fff63;}
+    25%{width: 20%; background: #2fff63;}
+    50%{width: 30%; background: #2fff63;}
+    75%{width: 40%; background: #2fff63;}
+    100%{width: 55%; background: #2fff63;}
+}
+
+#card-3 .iq-line{
+    animation: stretch3-zp 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch3-zp{
+    0%{width: 0%; background: #8153ff;}
+    15%{width: 15%; background: #8153ff;}
+    25%{width: 25%; background: #8153ff;}
+    50%{width: 35%; background: #8153ff;}
+    100%{width: 45%; background: #8153ff;}
+}
+/* me --------------------------------------------------------------- */
+/* #card-4 img{
+    margin-top: 15%;
+    margin-left: 15%;
+    width: 70%;
+    height: 80%;
+}*/
+#card-4 img{
+    margin-top: 29px;
+    margin-left: 0;
+    width: 100%;
+    height: 87%;
+}
+#card-4 .qoute {
+    color: #af0035;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 25px rgb(255, 255, 255), 0 0 5px rgb(255, 255, 255);
+    text-align: center;
+    width: 100%;
+}
+/* #card-4 .block{
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+} */
+/*
+#card-4 .front{
+    height: 100%;
+    background-image: radial-gradient(rgb(173, 87, 0), rgb(255, 189, 64), rgb(65, 64, 114),rgb(14, 47, 85));
+}
+#card-4 .back{
+    background-image: radial-gradient(rgb(248, 196, 143), rgb(243, 206, 138), rgb(94, 92, 89),rgb(94, 75, 63));
+    /*transform: perspective(600px) rotateY(180deg);/*rotate to the front*//*
+}
+#card-4 .health-line{
+    animation: stretch1-z2 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch1-z2{
+    0%{width: 0%; background: #ff3a3a;}
+    25%{width: 25%; background: #ff3a3a;}
+    50%{width: 50%; background: #ff3a3a;}
+    75%{width: 75%; background: #ff3a3a;}
+    100%{width: 100%; background: #ff3a3a;}
+}
+#card-4 .power-line{
+    animation: stretch2-z2 2s linear 0.5s normal forwards running;
+}
+
+@keyframes stretch2-z2{
+    0%{width: 0%; background: #2fff63;}
+    25%{width: 5%; background: #2fff63;}
+    50%{width: 8%; background: #2fff63;}
+    75%{width: 11%; background: #2fff63;}
+    100%{width: 14%; background: #2fff63;}
+}
+
+#card-4 .iq-line{
+    animation: stretch3-z2 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch3-z2{
+    0%{width: 0%; background: #8153ff;}
+    15%{width: 2%; background: #8153ff;}
+    25%{width: 4%; background: #8153ff;}
+    50%{width: 2%; background: #8153ff;}
+    100%{width: 1%; background: #8153ff;}
+}*/
+
+#card-4 .front{
+    height: 100%;
+    background-image: radial-gradient(rgb(255, 239, 145), rgb(255, 145, 182),rgb(255, 122, 177),rgb(255, 218, 117));
+    
+}
+#card-4 .back{
+    background-image:linear-gradient(rgb(255, 147, 201), rgb(201, 134, 255), rgb(169, 249, 255)); 
+    /* background-image:url(../imgs/back-g/backg-me.jpg); */
+    /* background-image: linear-gradient(rgb(255, 147, 201), rgb(201, 134, 255), rgb(169, 249, 255)); */
+    /*transform: perspective(600px) rotateY(180deg);/*rotate to the front*/
+}
+#card-4 .health-line{
+    animation: stretch1-z2 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch1-z2{
+    0%{width: 0%; background: #ff3a3a;}
+    25%{width: 25%; background: #ff3a3a;}
+    50%{width: 50%; background: #ff3a3a;}
+    75%{width: 75%; background: #ff3a3a;}
+    100%{width: 100%; background: #ff3a3a;}
+}
+#card-4 .power-line{
+    animation: stretch2-z2 2s linear 0.5s normal forwards running;
+}
+
+@keyframes stretch2-z2{
+    0%{width: 0%; background: #2fff63;}
+    25%{width: 25%; background: #2fff63;}
+    50%{width: 50%; background: #2fff63;}
+    75%{width: 75%; background: #2fff63;}
+    100%{width: 100%; background: #2fff63;}
+}
+
+#card-4 .iq-line{
+    animation: stretch3-z2 2s linear 0.5s normal forwards running;
+}
+@keyframes stretch3-z2{
+    0%{width: 0%; background: #8153ff;}
+    15%{width: 15%; background: #8153ff;}
+    25%{width: 25%; background: #8153ff;}
+    50%{width: 50%; background: #8153ff;}
+    100%{width: 110%; background: #8153ff;}
 }
