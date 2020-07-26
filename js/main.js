@@ -1,19 +1,5 @@
 //game js
 
-//TODO: V initGame() -This is called when page loads;
-//TODO: V buildBoard() -
-//* Builds the board                V
-//* Set mines at random locations   V
-//* Call setMinesNegsCount()        V
-//* Return the created board        V
-//TODO: V setMinesNegsCount(board) -Count mines around each cell and set the cell's minesAroundCount;
-//TODO: V renderBoard(board)  -Render the board as a <table> to the page;   
-//TODO: V cellClicked(elCell, i, j)  -Called when a cell (td) is clicked;
-//TODO: V cellMarked(elCell)  -Called on right click to mark a cell (suspected to be a mine) Search the web (and implement) how to hide the context menu on right click;
-//TODO: V checkGameOver()  -Game ends when all mines are marked, and all the other cells are shown;
-//TODO: expandShown(board, elCell,i, j) -When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors;
-//TODO: the global object variables: gBoard, gLevel, gGame;
-// debugger;
 var watch = new timer();//evry thing that happen in timer() will be given to the new function
 var gameMusic; //background music
 var gLevel=gameLevel(); //now on level1 {SIZE: 4, MINES: 2,life:0}
@@ -109,8 +95,6 @@ function restart() {
     // watch.reset();
     document.querySelector('.play-again').innerHTML = '😀';
 
-    // var element = document.getElementsByClassName("hints");
-    // element.style.opacity = '100%';
     document.querySelector('.shown-count').innerHTML = countNumCells;
     gBoard = buildBoard(gLevel.MINES, gLevel.SIZE);
     console.table(gBoard);
@@ -346,12 +330,10 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
 }
-//**************************************************************************************** */
+
 function shown(btn,rowIdx, collIdx) {
-    // var elTd = document.getElementById((4 * rowIdx + (collIdx + 1)).toString());  //** */
-    // elTd.classList.add("td-shown");
     if (gGame.isOn) {
-        // var elTd = document.getElementById((4 * rowIdx + (collIdx + 1)).toString());  //** */
+        // var elTd = document.getElementById((4 * rowIdx + (collIdx + 1)).toString()); 
         // elTd.classList.add("td-shown");
         gBoard[rowIdx][collIdx].isShown = true;
     
@@ -365,7 +347,7 @@ function shown(btn,rowIdx, collIdx) {
             // elLife[LIFE].classList.add(`life${LIFE}-end`);
         }else{   //** */
             countNumCells++;
-            // console.log('btn.id',btn.id);
+        
         }
 
         // gBoard[rowIdx][collIdx].isShown = true;
@@ -386,7 +368,6 @@ function shown(btn,rowIdx, collIdx) {
             buildBoardPlacingMinesAndNibers(gLevel.MINES, gLevel.SIZE);
             openNeighbors();
         }
-        // elTd.classList.replace("td-hidden", "td-shown");
         renderTheBoard(gBoard);
         
     }
@@ -419,8 +400,6 @@ function gameOver() {
     if(LIFE!==0){   //* adding lives to the game 
         return;
     }
-    // var elLife = document.querySelectorAll('.lives');
-    // elLife[LIFE].style.opacity = '0';
     console.log('Game Over');
     watch.stop();
     gGame.isOn = false;
@@ -570,74 +549,3 @@ function gameStyle(hero){
 
 }
 
-
-
-
-//     var rRow = getRandomInt(0, len);
-//     var rColl = getRandomInt(0, len);
-//     var rowColl = {
-//         row: rRow,
-//         coll: rColl
-//     };
-//     console.log(rowColl);
-//     gMainRandomPlaces.push(rowColl);
-//     board[rRow][rColl].isMine = true;
-//     console.log('gMainRandomPlaces', gMainRandomPlaces);
-//     for (var i = 1; i < mineCount; i++) { //Set mines at random locations
-//         // debugger;
-//         var isNotMineCoor = true;
-//         while (isNotMineCoor) {
-//             isNotMineCoor = false;
-//             rRow = getRandomInt(0, len);
-//             rColl = getRandomInt(0, len);
-//             rowColl = {
-//                 row: rRow,
-//                 coll: rColl
-//             };
-
-//             for (var j = 0; j < gMainRandomPlaces.length; j++) {
-//                 if (rowColl.row === gMainRandomPlaces[j].row && rowColl.coll === gMainRandomPlaces[j].coll) {
-//                     isNotMineCoor = true;
-//                     // rRow = getRandomInt(0,len);
-//                     // rColl = getRandomInt(0,len);
-//                 }
-//             }
-//             if (!isNotMineCoor) {
-//                 gMainRandomPlaces.push(rowColl);
-//                 board[rRow][rColl].isMine = true;
-//                 // countMines++
-//                 // console.log(countMines)
-//             }
-//         }
-//     }
-//     bored = setMinesNegsCount(board, len);
-//     return board;
-// }
-
-
-// function setMinesNegsCount(board, len) {
-//     // debugger;
-//     var currCell;
-//     var count;
-//     var currNeighborCell;
-//     for (var i = 0; i < len; i++) {
-//         for (var j = 0; j < len; j++) {
-//             count = 0;
-//             currCell = board[i][j];
-//             for (var x = (i - 1); x <= (i + 1); x++) {
-//                 for (var y = (j - 1); y <= (j + 1); y++) {
-//                     if (x >= 0 && y >= 0 & x < len && y < len && (!(x === i && y === j))) {
-//                         currNeighborCell = board[x][y]
-//                         if (currNeighborCell.isMine === true) {
-//                             count++;
-//                         }
-//                     }
-//                 }
-//             }
-//             currCell.minesAroundCount += count
-//             console.log('currCell', count);
-//         }
-//     }
-//     return board;
-// }
-//
